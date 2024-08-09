@@ -4,7 +4,7 @@ import {
     UpdateDateColumn,
 } from "typeorm"
 import { Field, ID } from "@nestjs/graphql"
-import { plainToInstance } from "class-transformer"
+import { ClassConstructor, plainToInstance } from "class-transformer"
 
 export abstract class AbstractEntity {
     @Field(() => ID)
@@ -21,7 +21,7 @@ export abstract class AbstractEntity {
     @UpdateDateColumn({name: "updated_at"})
         updatedAt: Date
     
-    toDto<Dto>(dtoClass: new () => Dto): Dto {
+    toDto<Dto>(dtoClass: ClassConstructor<Dto>): Dto {
         return plainToInstance(dtoClass, this)
     }
 }
