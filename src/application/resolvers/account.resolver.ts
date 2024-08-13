@@ -1,8 +1,7 @@
 
 import { AccountPostgresEntity } from "@/database"
-import { AccountsResolverService } from "@/services"
+import { AccountsResolverService, GetAccountInput } from "@/services"
 import { Args, Query, Resolver } from "@nestjs/graphql"
-import { GetAccountInput } from "@/services"
 import { UseGuards } from "@nestjs/common"
 import { EmptyInputGuard } from "@/guards"
 
