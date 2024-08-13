@@ -69,10 +69,8 @@ describe("ClawControllerService", () => {
                     },
                 },
             )
-            console.log(`Balance: ${balance}`)
             expect(balance >= 0)
-            const x = await dataSource.manager.delete(AccountPostgresEntity, account.id)
-            console.log(x)
+            await dataSource.manager.delete(AccountPostgresEntity, account.id)
         })
     })
 })

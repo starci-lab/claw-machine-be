@@ -47,7 +47,7 @@ describe("AccountsResolverService", () => {
                 aptosAddress: "0xc0ffee",
                 clawTickets: [{}],
             })
-            
+
             const { publicKey } = await service.getAccount({
                 aptosAddress: "0xc0ffee"
             })
