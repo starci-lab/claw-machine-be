@@ -22,7 +22,6 @@ export class AccountsResolverService {
                     clawTickets: true,
                 },
             })
-            console.log(queryRunner)
             return account
         } finally {
             await queryRunner.release()
