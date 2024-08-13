@@ -1,6 +1,7 @@
 import { AccountPostgresEntity } from "@/database"
 import { Injectable, Logger } from "@nestjs/common"
 import { DataSource } from "typeorm"
+import { GetAccountInput } from "./dtos"
 
 @Injectable()
 export class AccountsResolverService {
@@ -29,8 +30,5 @@ export class AccountsResolverService {
     }
 }
 
-export type GetAccountParams = {
-    publicKey?: string,
-    aptosAddress?: string
-}
+export type GetAccountParams = GetAccountInput
 
