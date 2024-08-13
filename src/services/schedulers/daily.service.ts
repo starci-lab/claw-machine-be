@@ -1,4 +1,4 @@
-import { AccountPostgresEntity, SpinTicketPostgresEntity } from "@/database"
+import { AccountPostgresEntity, ClawTicketPostgresEntity } from "@/database"
 import { Injectable, Logger } from "@nestjs/common"
 import { DataSource, DeepPartial } from "typeorm"
 
@@ -8,17 +8,17 @@ export class DailySchedulerService {
 
     constructor(private dataSource: DataSource) {}
 
-    public async createSpinTicket() {
+    public async createClawTicket() {
         const queryRunner = this.dataSource.createQueryRunner()
         await queryRunner.connect()
         
         const accounts = await queryRunner.manager.find(AccountPostgresEntity)
         await queryRunner.startTransaction()
         try { 
-            const spinTickets: Array<DeepPartial<SpinTicketPostgresEntity>> = accounts.map(({ id }) => ({
+            const clawTickets: Array<DeepPartial<ClawTicketPostgresEntity>> = accounts.map(({ id }) => ({
                 accountId: id,
             }))
-            await queryRunner.manager.save(SpinTicketPostgresEntity, spinTickets)
+            await queryRunner.manager.save(ClawTicketPostgresEntity, clawTickets)
 
             await queryRunner.commitTransaction()
         } catch (ex: unknown) {

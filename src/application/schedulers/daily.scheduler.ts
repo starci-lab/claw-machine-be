@@ -10,7 +10,7 @@ export class DailyScheduler {
       name: "notifications",
       timeZone: "Asia/Ho_Chi_Minh",
   })
-    async createSpinTicket() {
-        await this.dailyService.createSpinTicket()
+    async createClawTicket() {
+        await this.dailyService.createClawTicket()
     }
 }

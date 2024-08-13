@@ -1,0 +1,21 @@
+type ClawTicketPostgresEntity {
+  is_used: Boolean
+  account_id: ID
+  account: AccountPostgresEntity
+}
+
+type AccountPostgresEntity {
+  public_key: String
+  aptos_address: String
+  balance: Float
+  claw_tickets: [ClawTicketPostgresEntity!]
+}
+
+type Query {
+  account(input: GetAccountInput!): AccountPostgresEntity
+}
+
+input GetAccountInput {
+  public_key: String
+  aptos_address: String
+}
