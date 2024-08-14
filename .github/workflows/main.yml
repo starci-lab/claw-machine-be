@@ -36,3 +36,4 @@ jobs:
         SSL_KEY: ${{secrets.SSL_KEY}}
   
       run: docker compose -f .docker/production-docker-compose.yaml -p claw-machine-backend up --build -d 
+ 
