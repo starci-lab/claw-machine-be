@@ -1,0 +1,35 @@
+name: Deploy on self-hosted runner
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker-compose:
+    runs-on: self-hosted
+    environment: docker
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2 
+ 
+    - name: Run `docker compose`
+      env:
+        POSTGRES_MASTER_HOST: ${{ secrets.POSTGRES_MASTER_HOST }}
+        POSTGRES_MASTER_PORT: ${{ secrets.POSTGRES_MASTER_PORT }}
+        POSTGRES_MASTER_USERNAME: ${{ secrets.POSTGRES_MASTER_USERNAME }}
+        POSTGRES_MASTER_PASSWORD: ${{ secrets.POSTGRES_MASTER_PASSWORD }}
+        POSTGRES_MASTER_DATABASE: ${{ secrets.POSTGRES_MASTER_DATABASE }}
+        POSTGRES_MASTER_MOCK_DATABASE: ${{ secrets.POSTGRES_MASTER_MOCK_DATABASE }}
+
+        POSTGRES_SLAVE_1_HOST: ${{ secrets.POSTGRES_SLAVE_1_HOST }}
+        POSTGRES_SLAVE_1_PORT: ${{ secrets.POSTGRES_SLAVE_1_PORT }}
+        POSTGRES_SLAVE_1_USERNAME: ${{ secrets.POSTGRES_SLAVE_1_USERNAME }}
+        POSTGRES_SLAVE_1_PASSWORD: ${{ secrets.POSTGRES_SLAVE_1_PASSWORD }}
+        POSTGRES_SLAVE_1_DATABASE: ${{ secrets.POSTGRES_SLAVE_1_DATABASE }}
+        POSTGRES_SLAVE_1_MOCK_DATABASE: ${{ secrets.POSTGRES_SLAVE_1_MOCK_DATABASE }}
+        
+        PORT: ${{vars.PORT}}
+        NODE_ENV: ${{vars.NODE_ENV}}
+  
+      run: docker compose -f docker/github-action-compose.yaml -p cross-chain-meme-creator-backend up --build -d 
