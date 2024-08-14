@@ -17,7 +17,7 @@ export class AccountPostgresEntity extends AbstractEntity {
       length: "66",
       nullable: true,
   })
-      aptosAddress: string
+      aptosAddress?: string
 
   @Field(() => Float, { nullable: true,  name: "balance" })
   @Column({ name: "balance", type: "float", default: 0 })
@@ -29,5 +29,5 @@ export class AccountPostgresEntity extends AbstractEntity {
       (clawTicket) => clawTicket.account,
       { nullable: true, cascade: true, onDelete: "CASCADE" },
   )
-      clawTickets?: Array<ClawTicketPostgresEntity>
+      clawTickets: Array<ClawTicketPostgresEntity>
 }
