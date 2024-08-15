@@ -101,5 +101,7 @@ const bootstrap = async () => {
 }
 
 generateSchema()
-    .then(() => createDatabases())
-    .then(() => bootstrap())
+    .then(() => createDatabases()
+        .then(() => bootstrap()
+        )
+    )
